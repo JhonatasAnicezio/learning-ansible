@@ -1,0 +1,60 @@
+
+services:
+  server01:
+    image: ubuntu:24.04
+    container_name: server01
+    hostname: server01
+    command: >
+      bash -c "apt update &&
+      apt install -y openssh-server python3 sudo &&
+      mkdir -p /run/sshd &&
+      useradd -m -s /bin/bash ansible &&
+      echo 'ansible:ansible123' | chpasswd &&
+      usermod -aG sudo ansible &&
+      echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
+      /usr/sbin/sshd -D"
+    networks:
+      ansible_net:
+        ipv4_address: 172.20.0.10
+
+  server02:
+    image: ubuntu:24.04
+    container_name: server02
+    hostname: server02
+    command: >
+      bash -c "apt update &&
+      apt install -y openssh-server python3 sudo &&
+      mkdir -p /run/sshd &&
+      useradd -m -s /bin/bash ansible &&
+      echo 'ansible:ansible123' | chpasswd &&
+      usermod -aG sudo ansible &&
+      echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
+      /usr/sbin/sshd -D"
+    networks:
+      ansible_net:
+        ipv4_address: 172.20.0.11
+
+  server03:
+    image: ubuntu:24.04
+    container_name: server03
+    hostname: server03
+    command: >
+      bash -c "apt update &&
+      apt install -y openssh-server python3 sudo &&
+      mkdir -p /run/sshd &&
+      useradd -m -s /bin/bash ansible &&
+      echo 'ansible:ansible123' | chpasswd &&
+      usermod -aG sudo ansible &&
+      echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
+      /usr/sbin/sshd -D"
+    networks:
+      ansible_net:
+        ipv4_address: 172.20.0.12
+
+networks:
+  ansible_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1

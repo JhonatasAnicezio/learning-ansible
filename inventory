@@ -1,3 +1,12 @@
-172.20.0.10
-172.20.0.11
-172.20.0.12
+[servers]
+server01 ansible_host=172.20.0.10
+server02 ansible_host=172.20.0.11
+server03 ansible_host=172.20.0.12
+
+[servers:vars]
+ansible_user=ansible
+ansible_connection=ssh
+ansible_ssh_pass=ansible123
+ansible_become=true
+ansible_become_password=ansible123
+ansible_python_interpreter=/usr/bin/python3

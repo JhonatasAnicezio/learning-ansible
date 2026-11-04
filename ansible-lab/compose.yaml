@@ -1,4 +1,3 @@
-
 services:
   server01:
     image: ubuntu:24.04
@@ -43,8 +42,6 @@ services:
       apt install -y openssh-server python3 sudo &&
       mkdir -p /run/sshd &&
       useradd -m -s /bin/bash ansible &&
-      echo 'ansible:ansible123' | chpasswd &&
-      usermod -aG sudo ansible &&
       echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
       /usr/sbin/sshd -D"
     networks:
